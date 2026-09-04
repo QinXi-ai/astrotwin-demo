@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://dashscope.aliyuncs.com; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="theme-color" content="#050713">
+  <meta name="description" content="AstroTwin 真实 TESS × Qwen AI Scientist 比赛演示台">
+  <title>AstroTwin · TESS AI Scientist</title>
+  <link rel="icon" href="assets/astrotwin-hero-v1.png" type="image/png">
+  <link rel="stylesheet" href="styles.css?v=20260826b">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="AstroTwin 首页">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span>
+        <strong>ASTROTWIN</strong>
+        <small>TESS × QWEN AI SCIENTIST</small>
+      </span>
+    </a>
+    <div class="header-actions">
+      <a class="lab-jump desktop-only" href="#judgeLab"><span aria-hidden="true">✦</span> 评委实验台</a>
+      <span class="connection" id="connectionState" data-state="loading">
+        <span class="connection-dot" aria-hidden="true"></span>
+        <span id="connectionText">正在连接真实证据</span>
+      </span>
+      <button class="icon-button" id="openEvidence" type="button" aria-label="打开 SHA-256 证据舱">
+        <span aria-hidden="true">⌁</span>
+        <span class="desktop-only">证据舱</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="star-noise" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span></span> XH-202619 · PHOTON VERDICT ARENA</div>
+          <p class="public-demo-note"><b>公开评审版</b> 证据回放无需登录 · Judge Lab 支持评委临时 BYOK</p>
+          <h1 id="heroTitle">让两个宇宙同时诞生，<br><em>再用真实光子<span class="mobile-break"><br></span>杀死错误的那个</em></h1>
+          <p class="hero-lead">两颗外观相似的真实 TESS 目标，三条模型路线给出相反证词。评委先押注，再释放 1060×20×20 Pixel 光子，现场重算哪种模态真正改变了科学结论。</p>
+
+          <div class="hero-actions">
+            <a class="primary-button lab-launch" id="runScienceHero" href="stellar.html?arena=1">
+              <span class="button-glow" aria-hidden="true"></span>
+              <span aria-hidden="true">✦</span>
+              <span>进入光子裁决场</span>
+            </a>
+            <a class="secondary-button" href="#scienceWorkbench"><span aria-hidden="true">⌕</span><span>打开完整科学链</span></a>
+          </div>
+
+          <div class="hero-facts" aria-label="演示特性">
+            <span><i class="fact-icon fact-real" aria-hidden="true"></i>真实 QLP × Pixel</span>
+            <span><i class="fact-icon fact-offline" aria-hidden="true"></i><b id="scienceObjectCount">120</b> 个研究对象</span>
+            <span><i class="fact-icon fact-real" aria-hidden="true"></i>浏览器内静态回放</span>
+            <a href="stellar.html?arena=1&amp;xray=1"><i class="fact-icon fact-atomic" aria-hidden="true"></i>技术 X-Ray ↗</a>
+            <span hidden><b id="networkFact">—</b></span>
+          </div>
+        </div>
+
+        <aside class="verdict-card reveal" aria-labelledby="verdictHeading">
+          <div class="verdict-topline">
+            <span>LIVE SCIENCE VERDICT</span>
+            <span class="live-pulse"><i></i> RECEIPT</span>
+          </div>
+          <div class="verdict-orbit" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span>AT</span>
+          </div>
+          <p class="verdict-kicker" id="verdictHeading">当前自动裁决</p>
+          <h2 id="verdictLocal">正在核验</h2>
+          <code id="verdictRaw">VERIFYING_EVIDENCE</code>
+          <div class="eligibility" id="eligibilityBadge" data-state="pending">
+            <span aria-hidden="true">◆</span>
+            <span id="eligibilityText">发布资格待核验</span>
+          </div>
+          <dl class="verdict-meta">
+            <div><dt>RUN</dt><dd id="packageId">—</dd></div>
+            <div><dt>MODE</dt><dd id="demoMode">—</dd></div>
+            <div><dt>MANIFEST</dt><dd id="manifestShort">—</dd></div>
+          </dl>
+        </aside>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span>EXPLORE THE CHAIN</div>
+    </section>
+
+    <section class="science-workbench" id="scienceWorkbench" data-state="loading" aria-labelledby="scienceWorkbenchTitle">
+      <div class="science-aurora" aria-hidden="true"></div>
+      <div class="section-shell science-shell">
+        <header class="science-intro">
+          <div>
+            <p class="eyebrow"><span></span> LIVE SCIENCE WORKBENCH · 120 VERIFIED OBJECTS</p>
+            <h2 id="scienceWorkbenchTitle">选一个科学问题，<br><em>让证据现在重新计算。</em></h2>
+          </div>
+          <div class="science-intro-copy">
+            <p>后端只读取当前已验真的 Error Atlas。每次运行都会重算共同 cohort、四类混淆矩阵、配对检验与 5,000 次 target-group bootstrap。</p>
+            <span id="scienceSourceState" role="status" aria-live="polite">正在接入科学证据…</span>
+          </div>
+        </header>
+
+        <div class="science-mode-switch" role="tablist" aria-label="科学实验模式">
+          <button id="scienceModeGuided" type="button" role="tab" aria-selected="true" aria-controls="scienceControlPanel" data-science-mode="guided">导引实验</button>
+          <button id="scienceModeExplore" type="button" role="tab" aria-selected="false" aria-controls="scienceControlPanel" data-science-mode="explore">样本探索器</button>
+        </div>
+
+        <div class="science-layout">
+          <section class="science-controls" id="scienceControlPanel" aria-labelledby="scienceControlTitle">
+            <div class="science-panel-head"><small>01 / RESEARCH QUESTION</small><h3 id="scienceControlTitle">选择固定科学问题</h3></div>
+            <div class="science-experiment-cards" id="scienceExperimentCards" role="radiogroup" aria-label="导引科学实验">
+              <button type="button" data-science-experiment="pixel_incremental_value" role="radio" aria-checked="true"><span>01</span><strong>Pixel 增量价值</strong><small>Pixel 是否真正优于 baseline？</small></button>
+              <button type="button" data-science-experiment="pixel_feature_range_shift" role="radio" aria-checked="false"><span>02</span><strong>特征范围漂移</strong><small>越界特征是否对应更高错误风险？</small></button>
+              <button type="button" data-science-experiment="qwen_pixel_complementarity" role="radio" aria-checked="false"><span>03</span><strong>Qwen × Pixel 互补</strong><small>两条路线是否救回不同样本？</small></button>
+              <button type="button" data-science-experiment="qwen_eb_v_channel_collapse" role="radio" aria-checked="false"><span>04</span><strong>EB/V 通道塌缩</strong><small>Qwen 是否系统性漏掉两类形态？</small></button>
+            </div>
+
+            <form class="science-explorer" id="scienceExplorer" hidden autocomplete="off">
+              <fieldset><legend>比较路线</legend><label><input type="checkbox" name="scienceRoute" value="baseline" checked> Baseline</label><label><input type="checkbox" name="scienceRoute" value="pixel" checked> Pixel</label><label><input type="checkbox" name="scienceRoute" value="qwen"> Qwen</label></fieldset>
+              <label><span>真实类</span><select id="scienceTruthFilter"><option value="all">全部 PC / EB / V / IS</option><option value="PC">PC</option><option value="EB">EB</option><option value="V">V</option><option value="IS">IS</option></select></label>
+              <label><span>Pixel 状态</span><select id="sciencePixelFilter"><option value="all">全部</option><option value="available">可用</option><option value="missing">缺失</option><option value="in_range">训练范围内</option><option value="out_of_range">训练范围外</option></select></label>
+              <label><span>Qwen 覆盖</span><select id="scienceQwenFilter"><option value="all">全部记录</option><option value="joined">40 条联表</option></select></label>
+              <label><span>Error taxonomy</span><select id="scienceTaxonomyFilter"><option value="all">全部 taxonomy</option></select></label>
+            </form>
+
+            <button class="science-run" id="runScience" type="button" disabled><span aria-hidden="true">▶</span><span><strong>现场重算科学结论</strong><small>不训练模型 · 不调用 Qwen · 不写运行包</small></span></button>
+            <p class="science-run-status" id="scienceRunStatus" aria-live="polite">等待已验证 Error Atlas。</p>
+          </section>
+
+          <article class="science-result" id="scienceResult" data-state="empty" aria-labelledby="scienceResultTitle">
+            <div class="science-result-head"><div><small>02 / COMPUTED FINDING</small><h3 id="scienceResultTitle">运行后在这里读取结论</h3></div><span id="scienceVerdict" data-state="pending">WAIT</span></div>
+            <p class="science-question" id="scienceQuestion">选择左侧问题，评委将看到同一批真实样本怎样支持、反驳或限制一个假设。</p>
+            <div class="science-metric-grid" id="scienceRouteMetrics"><p>等待现场计算</p></div>
+            <div class="science-evidence-grid">
+              <section class="science-matrix-panel" aria-labelledby="scienceMatrixTitle"><div><small>CONFUSION MATRIX</small><h4 id="scienceMatrixTitle">四类混淆矩阵</h4></div><div id="scienceMatrices" class="science-matrices"><p>—</p></div></section>
+              <section class="science-scatter-panel" aria-labelledby="scienceScatterTitle"><div><small>PIXEL FEATURE SPACE</small><h4 id="scienceScatterTitle">质心差 × 孔径深度</h4></div><svg id="scienceScatter" viewBox="0 0 520 300" role="img" aria-label="Pixel 特征散点图"></svg><p id="scienceScatterSummary">—</p></section>
+            </div>
+            <section class="science-stat-panel" aria-labelledby="scienceStatTitle"><div><small>STATISTICAL TEST</small><h4 id="scienceStatTitle">主检验与不确定性</h4></div><div id="scienceStatTests"><p>—</p></div><p id="scienceBootstrap">—</p></section>
+            <div class="science-finding" id="scienceFinding"><p>结论、替代解释和下一实验将在计算后出现。</p></div>
+            <div class="science-result-actions">
+              <button id="downloadScienceJson" type="button" disabled>下载 JSON</button>
+              <button id="downloadScienceMarkdown" type="button" disabled>下载 Markdown</button>
+              <button id="sendScienceToJudgeLab" type="button" disabled>送入 Judge Lab ↳</button>
+            </div>
+            <p class="science-boundary">Sector 4 标签已暴露；这里做开发期机制诊断，不改变原 P07 产品 verdict。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="stellar-twin-stage" id="stellarTwinStage" data-state="loading" aria-labelledby="stellarTwinTitle" hidden aria-hidden="true">
+      <div class="stellar-twin-space" aria-hidden="true"></div>
+      <div class="stellar-twin-halo" aria-hidden="true"></div>
+      <div class="section-shell stellar-twin-shell">
+        <header class="stellar-twin-intro">
+          <div>
+            <p class="eyebrow"><span></span> STELLAR DIGITAL TWIN · REAL EVIDENCE CORE</p>
+            <h2 id="stellarTwinTitle">恒星数字孪生核心<br><em>让一颗真实恒星在评委面前醒来。</em></h2>
+          </div>
+          <div class="stellar-twin-intro-copy">
+            <p>把真实 TESS 光变、周期和模型裁决压进同一个可交互星体。旋转看到信号结构，聚焦看到证据如何支撑分类。</p>
+            <p class="stellar-twin-boundary"><span aria-hidden="true">◇</span> 可视化解释 · 非表面反演</p>
+          </div>
+        </header>
+
+        <div class="stellar-twin-console">
+          <div class="stellar-twin-viewport" id="stellarTwinViewport">
+            <canvas id="stellarTwinCanvas" role="img" aria-label="真实 TESS 证据驱动的恒星数字孪生正在加载" aria-describedby="stellarTwinSummary">
+              此浏览器不支持 Canvas。下方文本仍会展示当前真实样本、观测扇区、周期、光变范围与证据哈希。
+            </canvas>
+
+            <div class="stellar-twin-loading" id="stellarTwinLoading" role="status" aria-live="polite">
+              <span class="stellar-loader-orbit" aria-hidden="true"><i></i><i></i><i></i></span>
+              <strong>正在装配真实恒星孪生体</strong>
+              <small>VERIFYING TESS EVIDENCE · BUILDING ORBIT</small>
+            </div>
+            <div class="stellar-twin-failure" id="stellarTwinFailure" role="alert" hidden>
+              <span aria-hidden="true">!</span>
+              <strong>证据校验未通过，孪生体拒绝渲染</strong>
+              <small>Fail-closed · 不展示未经绑定的星体</small>
+            </div>
+
+            <div class="stellar-twin-reticle" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="stellar-twin-coordinate stellar-twin-coordinate-left" aria-hidden="true">TESS / PHOTOMETRIC SPACE</div>
+            <div class="stellar-twin-coordinate stellar-twin-coordinate-right" aria-hidden="true">DRAG TO ORBIT · SCROLL TO FOCUS</div>
+
+            <aside class="stellar-twin-hud" aria-label="当前恒星真实证据">
+              <div class="stellar-twin-hud-head">
+                <span><i aria-hidden="true"></i> EVIDENCE LINK</span>
+                <b id="stellarTwinMode">LOADING</b>
+              </div>
+              <dl>
+                <div><dt>样本</dt><dd id="stellarTwinObject">—</dd></div>
+                <div><dt>SECTOR</dt><dd id="stellarTwinSector">—</dd></div>
+                <div><dt>PERIOD</dt><dd id="stellarTwinPeriod">—</dd></div>
+                <div><dt>FLUX SPAN</dt><dd id="stellarTwinFlux">—</dd></div>
+                <div class="stellar-twin-hash"><dt>FITS SHA-256</dt><dd><code id="stellarTwinFitsHash">—</code></dd></div>
+              </dl>
+            </aside>
+
+            <div class="stellar-twin-caption">
+              <span>OBSERVATION</span><i aria-hidden="true"></i><span>PHASE</span><i aria-hidden="true"></i><span>MODEL</span>
+            </div>
+          </div>
+
+          <aside class="stellar-twin-story" aria-labelledby="stellarTwinHeadline">
+            <div class="stellar-twin-story-index"><span>ASTROTWIN CORE</span><b>01</b></div>
+            <div class="stellar-render-deck" aria-label="恒星渲染控制台">
+              <div class="stellar-render-row">
+                <span>RENDER</span>
+                <div role="group" aria-label="渲染质量">
+                  <button type="button" data-stellar-quality="cinema" aria-pressed="false">电影</button>
+                  <button type="button" data-stellar-quality="balanced" aria-pressed="true">流畅</button>
+                  <button type="button" data-stellar-quality="safe" aria-pressed="false">安全</button>
+                </div>
+              </div>
+              <div class="stellar-render-row">
+                <span>ROTATION</span>
+                <div role="group" aria-label="恒星旋转速度">
+                  <button type="button" data-stellar-speed="paused" aria-pressed="false">暂停</button>
+                  <button type="button" data-stellar-speed="normal" aria-pressed="true">1×</button>
+                  <button type="button" data-stellar-speed="fast" aria-pressed="false">2×</button>
+                </div>
+              </div>
+              <p><i aria-hidden="true"></i><span id="stellarRenderStatus">流畅级 · 实时证据同步</span></p>
+            </div>
+            <p class="stellar-twin-story-kicker">当前孪生体解释</p>
+            <h3 id="stellarTwinHeadline">等待真实样本进入轨道</h3>
+            <p id="stellarTwinNarrative">只有可与当前证据包哈希匹配的点列，才会生成这颗恒星的亮度脉动、周期环与分类光谱。</p>
+
+            <div class="stellar-twin-legend" aria-label="孪生体视觉编码">
+              <div><i class="twin-legend-flux" aria-hidden="true"></i><span><strong>表面脉动</strong><small>归一化亮度变化</small></span></div>
+              <div><i class="twin-legend-phase" aria-hidden="true"></i><span><strong>轨道光环</strong><small>固定周期与相位</small></span></div>
+              <div><i class="twin-legend-model" aria-hidden="true"></i><span><strong>色彩光谱</strong><small>模型概率与 verdict</small></span></div>
+            </div>
+
+            <button class="stellar-twin-focus" id="stellarTwinFocusButton" type="button" disabled aria-pressed="false">
+              <span class="stellar-twin-focus-icon" aria-hidden="true"><i></i></span>
+              <span><strong>启动 30 秒聚焦</strong><small>自动旋转 · 信号 → 周期 → 模型</small></span>
+            </button>
+            <p class="stellar-twin-disclaimer">视觉形态用于解释观测信号与模型决策，不代表从光变曲线反演出的真实恒星表面。</p>
+          </aside>
+        </div>
+
+        <nav class="stellar-twin-samples" aria-label="选择恒星数字孪生样本">
+          <button type="button" data-stellar-sample="canonical_correct" disabled aria-pressed="false">
+            <span>01</span><i aria-hidden="true"></i><strong>典型正确</strong><small>稳健分类样本</small>
+          </button>
+          <button type="button" data-stellar-sample="periodic_binary" disabled aria-pressed="false">
+            <span>02</span><i aria-hidden="true"></i><strong>周期双星</strong><small>轨道节律样本</small>
+          </button>
+          <button type="button" data-stellar-sample="hard_error" disabled aria-pressed="false">
+            <span>03</span><i aria-hidden="true"></i><strong>最难错例</strong><small>V → IS 决策冲突</small>
+          </button>
+        </nav>
+        <p class="stellar-twin-summary" id="stellarTwinSummary" aria-live="polite">真实证据加载后，这里会提供当前恒星样本、观测扇区、周期、光变范围和模型解释的完整文本替代。</p>
+      </div>
+    </section>
+
+    <section class="signal-stage" id="signalStage" data-state="loading" aria-labelledby="signalTitle">
+      <div class="signal-aurora" aria-hidden="true"></div>
+      <div class="signal-gridback" aria-hidden="true"></div>
+      <div class="section-shell signal-shell">
+        <header class="signal-intro">
+          <div>
+            <p class="eyebrow"><span></span> REAL TESS LIGHT CURVE · SCIENCE COCKPIT</p>
+            <h2 id="signalTitle">这不是一张结果表。<br><em>看 AstroTwin 怎样读懂一颗星。</em></h2>
+          </div>
+          <div class="signal-intro-copy">
+            <p>真实 QLP 光变逐点进入视野，固定星历完成相位折叠，三路模型现场投票，最后由程序 verdict 落锤。</p>
+            <button class="signal-tour-button" id="signalTourButton" type="button" disabled aria-pressed="false">
+              <span class="signal-tour-icon" aria-hidden="true">▶</span>
+              <span id="signalTourLabel">播放 30 秒答辩动画</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="signal-tour-track" aria-hidden="true">
+          <i id="signalTourProgress"></i>
+          <span>01 原始信号</span><span>02 相位折叠</span><span>03 模型对决</span><span>04 错例解剖</span>
+        </div>
+
+        <div class="signal-workbench" id="signalWorkbench" data-mode="raw">
+          <section class="signal-monitor" aria-labelledby="signalMonitorTitle">
+            <header class="signal-monitor-head">
+              <div>
+                <span class="monitor-live"><i aria-hidden="true"></i> REAL QLP TELEMETRY</span>
+                <h3 id="signalMonitorTitle">正在接入真实光变证据</h3>
+              </div>
+              <div class="monitor-coordinates">
+                <span id="signalSector">SECTOR —</span>
+                <code id="signalObjectId">OBJECT —</code>
+              </div>
+            </header>
+
+            <div class="signal-canvas-wrap" id="signalCanvasWrap">
+              <canvas id="lightCurveCanvas" role="img" aria-label="真实 TESS 光变曲线正在加载" aria-describedby="signalAccessibleSummary"></canvas>
+              <div class="signal-scanline" id="signalScanline" aria-hidden="true"></div>
+              <div class="signal-corner signal-corner-tl" aria-hidden="true"></div>
+              <div class="signal-corner signal-corner-br" aria-hidden="true"></div>
+              <p class="signal-axis signal-axis-y" id="signalYAxis">NORMALIZED FLUX</p>
+              <p class="signal-axis signal-axis-x" id="signalXAxis">TIME / DAYS</p>
+              <div class="signal-loading" id="signalLoading"><i aria-hidden="true"></i><span>VERIFYING REAL CADENCES</span></div>
+            </div>
+
+            <div class="signal-tabs" role="tablist" aria-label="光变曲线观察模式">
+              <button id="signalTabRaw" type="button" role="tab" aria-selected="true" aria-controls="signalPanel" tabindex="0" data-signal-mode="raw"><span>01</span>原始光变</button>
+              <button id="signalTabPhase" type="button" role="tab" aria-selected="false" aria-controls="signalPanel" tabindex="-1" data-signal-mode="phase"><span>02</span>相位折叠</button>
+              <button id="signalTabDuel" type="button" role="tab" aria-selected="false" aria-controls="signalPanel" tabindex="-1" data-signal-mode="duel"><span>03</span>模型对决</button>
+              <button id="signalTabError" type="button" role="tab" aria-selected="false" aria-controls="signalPanel" tabindex="-1" data-signal-mode="error"><span>04</span>错例解剖</button>
+            </div>
+            <div id="signalPanel" role="tabpanel" aria-labelledby="signalTabRaw">
+              <p class="signal-accessible-summary" id="signalAccessibleSummary">真实光变证据加载后，这里会给出当前样本、周期、亮度范围和模型裁决的可读摘要。</p>
+            </div>
+          </section>
+
+          <aside class="signal-inspector" aria-labelledby="signalInspectorTitle">
+            <div class="inspector-kicker"><span>ASTROTWIN / OBJECT DOSSIER</span><b id="signalModeBadge">RAW</b></div>
+            <h3 id="signalInspectorTitle">等待真实样本</h3>
+            <p class="signal-story" id="signalStory">页面只会绘制通过当前证据包 SHA-256 校验的真实派生点列。</p>
+
+            <div class="signal-verdict-lock" id="signalVerdictLock" data-state="pending">
+              <div><small>GROUND TRUTH</small><strong id="signalTruth">—</strong></div>
+              <span aria-hidden="true">→</span>
+              <div><small>FUSION VERDICT</small><strong id="signalPrediction">—</strong></div>
+              <b id="signalConfidence">—</b>
+            </div>
+
+            <dl class="signal-facts">
+              <div><dt>PERIOD</dt><dd id="signalPeriod">—</dd></div>
+              <div><dt>CADENCES</dt><dd id="signalCadences">—</dd></div>
+              <div><dt>GAPS</dt><dd id="signalGaps">—</dd></div>
+              <div><dt>FITS SHA</dt><dd><code id="signalFitsHash">—</code></dd></div>
+            </dl>
+
+            <section class="model-vote-board" aria-labelledby="modelVoteTitle">
+              <div><span>LIVE MODEL VOTES</span><h4 id="modelVoteTitle">三路模型如何投票</h4></div>
+              <ol id="signalModelVotes"></ol>
+            </section>
+
+            <div class="signal-proofline">
+              <span aria-hidden="true">SHA</span>
+              <p><strong>真曲线，不是生成图。</strong><small id="signalDataHash">可视化数据哈希等待核验</small></p>
+            </div>
+          </aside>
+        </div>
+
+        <nav class="signal-sample-deck" aria-label="真实 TESS 演示样本">
+          <button type="button" data-signal-sample="canonical_correct" disabled><span>CASE 01</span><strong>典型正确</strong><small>等待证据</small></button>
+          <button type="button" data-signal-sample="periodic_binary" disabled><span>CASE 02</span><strong>周期双星</strong><small>等待证据</small></button>
+          <button type="button" data-signal-sample="hard_error" disabled><span>CASE 03</span><strong>最难错例</strong><small>等待证据</small></button>
+        </nav>
+        <p class="signal-announcer" id="signalAnnouncer" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="judge-lab-section" id="judgeLab" aria-labelledby="judgeLabTitle">
+      <div class="lab-aurora" aria-hidden="true"></div>
+      <div class="section-shell judge-lab-shell">
+        <header class="lab-intro">
+          <div class="lab-trackline">
+            <span class="track-badge">赛题 XH-202619</span>
+            <span>阿里云百炼 · 国产 Qwen 大模型</span>
+            <span>AI SCIENTIST LIVE</span>
+          </div>
+          <div class="lab-heading-row">
+            <div>
+              <p class="eyebrow"><span></span> JUDGE-DRIVEN DISCOVERY</p>
+              <h2 id="judgeLabTitle">带上你的资料，<br><em>现场指挥一支 AI 科研团队</em></h2>
+            </div>
+              <p>评委可输入自己的百炼 API Key，直接从浏览器调用 DashScope。Key 仅在本次任务的页面内存中短暂存在，输入框提交后立即清空，不经过本站服务器、不写入存储或结果。</p>
+          </div>
+          <div class="score-radar" aria-label="赛题评分映射">
+            <div class="score-40"><strong>40</strong><span>科学价值</span><small>新颖假设 · 可证伪性</small></div>
+            <div class="score-30"><strong>30</strong><span>技术深度</span><small>Qwen 多智能体 · 证据闭环</small></div>
+            <div class="score-30"><strong>30</strong><span>应用潜力</span><small>跨领域输入 · 可复用工作流</small></div>
+            <p><b>100</b><span>赛道总分映射</span></p>
+          </div>
+        </header>
+
+        <div class="lab-workbench">
+          <form class="lab-form" id="judgeLabForm" autocomplete="off" novalidate>
+            <div class="lab-panel-head">
+              <div><small>01 / MISSION INPUT</small><h3>定义本次科学挑战</h3></div>
+              <span class="lab-private"><i aria-hidden="true"></i> 浏览器直连百炼 · Key 不落盘</span>
+            </div>
+
+            <div class="lab-field-grid">
+              <label class="lab-field lab-field-key">
+                <span>百炼 API Key <b id="labApiKeyRequirement">等待服务器策略</b></span>
+                <span class="secret-input-wrap">
+                  <input id="labApiKey" name="api_key" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="按服务器策略填写">
+                </span>
+              </label>
+              <label class="lab-field">
+                <span>Qwen 模型 <b>白名单</b></span>
+                <select id="labModel" name="model" required disabled>
+                  <option value="" selected>正在载入服务器白名单…</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="lab-field">
+              <span>研究领域</span>
+              <input id="labDomain" name="research_domain" type="text" maxlength="120" required placeholder="例如：时域天文、材料科学、生命科学">
+            </label>
+
+            <label class="lab-field">
+              <span>研究问题</span>
+              <textarea id="labQuestion" name="research_question" rows="3" maxlength="2000" required placeholder="你希望 AI 科研团队回答什么？尽量写清对象、现象和可验证目标。"></textarea>
+              <small class="field-counter"><span id="questionCount">0</span> / 2000</small>
+            </label>
+
+            <label class="lab-field lab-challenge-field">
+              <span>评委人工质疑 <b>初稿锁定后注入</b></span>
+              <textarea id="labHumanChallenge" name="human_challenge" rows="3" maxlength="2000" required placeholder="请提出一个会迫使初始假设实质改变的质疑，例如指出混淆因素、替代解释或不可证伪之处。"></textarea>
+              <small class="field-counter"><span id="humanChallengeCount">0</span> / 2000</small>
+            </label>
+
+            <label class="lab-field lab-material-field">
+              <span>相关资料 / 文献摘录</span>
+              <textarea id="labMaterial" name="source_material" rows="8" maxlength="40000" placeholder="粘贴论文摘要、观测记录、实验日志或数据说明。系统只接受文本，并对输入计算 SHA-256。也可只导入下方本地文件。"></textarea>
+              <small class="field-counter"><span id="materialCount">0</span> / <span id="materialLimit">40000</span></small>
+            </label>
+
+            <div class="file-drop" id="labFileDrop">
+              <input id="labFile" type="file" accept=".txt,.md,.csv,.tsv,.json,.jsonl,.yaml,.yml,.xml,.tex,.bib,text/plain,text/markdown,text/csv,application/json">
+              <label for="labFile"><span aria-hidden="true">↥</span><strong>导入本地文本资料</strong><small>TXT / MD / CSV / JSON / YAML / TEX · 单项最多 <b id="labFileLimit">40,000</b> 字符</small></label>
+              <div class="file-chip" id="labFileChip" hidden><span id="labFileName">—</span><code id="labFileHash">—</code><button id="clearLabFile" type="button" aria-label="移除已导入的文本资料">×</button></div>
+            </div>
+
+            <div class="credential-notice">
+              <span aria-hidden="true">⌁</span>
+              <p><strong id="labCredentialMode">正在读取凭证策略。</strong> Key 一旦提交即从页面清空；页面不使用 localStorage 或 sessionStorage。资料原文不进入发布包，人工质疑只在初始假设完成并锁定哈希后交给修订智能体。</p>
+            </div>
+
+            <div class="lab-submit-row">
+              <button class="lab-submit" id="runJudgeLab" type="submit" disabled>
+                <span class="button-glow" aria-hidden="true"></span>
+                <span aria-hidden="true">▶</span>
+                <span>启动多智能体科研挑战</span>
+              </button>
+              <p>最长约 6 分钟 · 自动截止 · 任一硬校验失败即关闭发布资格</p>
+            </div>
+            <p class="lab-form-error" id="labFormError" role="alert" hidden></p>
+          </form>
+
+          <section class="lab-live" aria-labelledby="labLiveTitle">
+            <div class="lab-panel-head">
+              <div><small>02 / LIVE SCIENCE ROOM</small><h3 id="labLiveTitle">智能体协同与赛题输出</h3></div>
+              <span class="lab-run-state" id="labRunState" data-state="ready"><i aria-hidden="true"></i><b>READY</b></span>
+            </div>
+
+            <ol class="lab-agent-flow" id="labAgentFlow" aria-label="AI Scientist 智能体进度" aria-live="polite">
+              <li data-lab-agent="fact_extractor" data-state="pending"><span>FACT</span><div><strong>资料审阅员</strong><small>提取可追溯事实</small></div><b>WAIT</b></li>
+              <li data-lab-agent="hypothesis_generator" data-state="pending"><span>HYP</span><div><strong>假设生成器</strong><small>提出可证伪假设</small></div><b>WAIT</b></li>
+              <li data-lab-agent="adversarial_critic_pre" data-state="pending"><span>CRIT</span><div><strong>反方审稿人</strong><small>找出漏洞与混淆项</small></div><b>WAIT</b></li>
+              <li data-lab-agent="hypothesis_reviser" data-state="pending"><span>REV</span><div><strong>假设修订师</strong><small>闭合阻断意见</small></div><b>WAIT</b></li>
+              <li data-lab-agent="experiment_designer" data-state="pending"><span>EXP</span><div><strong>实验设计师</strong><small>设计验证路径</small></div><b>WAIT</b></li>
+              <li data-lab-agent="report_writer" data-state="pending"><span>DOC</span><div><strong>论文整合师</strong><small>生成题目与摘要</small></div><b>WAIT</b></li>
+              <li data-lab-agent="hard_validator" data-state="pending"><span>SHA</span><div><strong>程序验真器</strong><small>receipt 与原子发布</small></div><b>WAIT</b></li>
+            </ol>
+
+            <div class="lab-live-message">
+              <span aria-hidden="true">›</span>
+              <p id="labRunMessage" aria-live="polite">等待评委定义科学挑战。原 TESS 离线证据演示仍可独立运行。</p>
+            </div>
+
+            <article class="lab-result" id="labResult" data-state="empty" aria-labelledby="labResultTitle">
+              <div class="lab-result-top">
+                <div><small>VERIFIABLE HYPOTHESIS</small><h4 id="labResultTitle">可验证科学假设</h4></div>
+                <span id="labEligibility" data-state="pending">尚未运行</span>
+              </div>
+              <p class="hypothesis-output" id="labHypothesis">运行完成后，核心假设会显示在这里。</p>
+              <section class="lab-revision" id="labRevision" data-state="pending" aria-labelledby="labRevisionTitle">
+                <div class="lab-revision-head">
+                  <div><small>HUMAN-IN-THE-LOOP</small><h5 id="labRevisionTitle">初版 → 人工质疑 → 实质修订</h5></div>
+                  <span id="labRevisionState">等待可验证修订</span>
+                </div>
+                <div class="lab-challenge-record">
+                  <span>评委质疑</span>
+                  <p id="labHumanChallengeResult">—</p>
+                  <code id="labHumanChallengeHash">—</code>
+                </div>
+                <div class="lab-revision-flow" aria-label="假设修订哈希链">
+                  <div><span>初版假设 SHA-256</span><code id="labInitialHypothesisHash">—</code></div>
+                  <span aria-hidden="true">→</span>
+                  <div><span>修订版假设 SHA-256</span><code id="labFinalHypothesisHash">—</code></div>
+                </div>
+                <div class="lab-change-record">
+                  <span>发生变化的决策字段</span>
+                  <ul id="labChangedFields"><li>等待服务端差异证据</li></ul>
+                </div>
+                <dl class="lab-revision-meta">
+                  <div><dt>质疑响应 SHA-256</dt><dd><code id="labChallengeResponseHash">—</code></dd></div>
+                  <div><dt>最终阻断问题</dt><dd id="labFinalBlockingCount">—</dd></div>
+                </dl>
+              </section>
+              <dl class="competition-output">
+                <div><dt>科学价值 / 40</dt><dd id="labScientificValue">—</dd><small id="labScientificEvidence">等待 evidence map</small></div>
+                <div><dt>技术深度 / 30</dt><dd id="labTechnicalDepth">—</dd><small id="labTechnicalEvidence">等待 evidence map</small></div>
+                <div><dt>应用潜力 / 30</dt><dd id="labApplicationPotential">—</dd><small id="labApplicationEvidence">等待 evidence map</small></div>
+                <div><dt>自动裁决</dt><dd id="labVerdict">—</dd></div>
+              </dl>
+              <div class="lab-output-block"><span>验证方案</span><p id="labValidationPlan">—</p></div>
+              <div class="lab-output-block"><span>关键限制</span><p id="labLimitations">—</p></div>
+              <section class="lab-standard-output" aria-labelledby="labStandardTitle">
+                <div><span>赛题标准输出</span><h5 id="labStandardTitle">10 项科研方案字段</h5></div>
+                <dl id="labStandardFields">
+                  <div><dt>Problem Statement</dt><dd>—</dd></div>
+                  <div><dt>Rationale</dt><dd>—</dd></div>
+                  <div><dt>Technical Details</dt><dd>—</dd></div>
+                  <div><dt>Datasets</dt><dd>—</dd></div>
+                  <div><dt>Paper Title</dt><dd>—</dd></div>
+                  <div><dt>Paper Abstract</dt><dd>—</dd></div>
+                  <div><dt>Methods</dt><dd>—</dd></div>
+                  <div><dt>Experiments</dt><dd>—</dd></div>
+                  <div><dt>Results</dt><dd>—</dd></div>
+                  <div><dt>References</dt><dd>—</dd></div>
+                </dl>
+              </section>
+              <dl class="lab-receipt-meta">
+                <div><dt>REQUEST ID</dt><dd><code id="labRequestId">—</code></dd></div>
+                <div><dt>INPUT SHA-256</dt><dd><code id="labInputHash">—</code></dd></div>
+                <div><dt>OUTPUT SHA-256</dt><dd><code id="labOutputHash">—</code></dd></div>
+                <div><dt>RECEIPT SHA-256</dt><dd><code id="labReceiptHash">—</code></dd></div>
+                <div><dt>MODEL / USAGE</dt><dd><code id="labUsage">—</code></dd></div>
+                <div><dt>RUN METADATA SHA-256</dt><dd><code id="labRunMetadataHash">—</code></dd></div>
+                <div><dt>SECRET SCANNER SHA-256</dt><dd><code id="labSecretScannerHash">—</code></dd></div>
+                <div><dt>SECRET SCAN</dt><dd><code id="labSecretScanState">—</code></dd></div>
+              </dl>
+            </article>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="metric-strip section-shell" aria-labelledby="metricsTitle">
+      <div class="section-heading compact">
+        <div><span class="section-index">01</span><p>REAL EXECUTION</p></div>
+        <h2 id="metricsTitle">一眼看懂这次演示跑出了什么</h2>
+      </div>
+      <section class="generalization-compare" id="generalizationCompare" data-state="loading" aria-labelledby="generalizationTitle">
+        <header>
+          <div><small>LOCAL EVIDENCE vs SECTOR 4 STRESS TEST</small><h3 id="generalizationTitle">同一冻结模型，开发证据与外部压力测试同屏</h3></div>
+          <span id="generalizationState" role="status" aria-live="polite">正在读取 API 证据</span>
+        </header>
+        <div class="generalization-scoreboard">
+          <article>
+            <span>本地开发结果 · MACRO-F1</span>
+            <strong id="localComparisonF1">—</strong>
+            <p><b id="localComparisonSamples">—</b> <span id="localComparisonScope">等待 API 范围</span></p>
+          </article>
+          <span class="comparison-arrow" aria-hidden="true">→</span>
+          <article>
+            <span>SECTOR 4 压力测试 · MACRO-F1</span>
+            <strong id="sector4ComparisonF1">—</strong>
+            <p><b id="sector4ComparisonSamples">—</b> <span id="sector4ComparisonScope">等待 API 范围</span></p>
+          </article>
+        </div>
+        <p class="generalization-boundary"><span aria-hidden="true">!</span><span><strong>边界：</strong><span id="generalizationBoundary">Sector 4 标签一旦被用于调参，该批次就降为开发集；新的外部主张必须换用全新未见数据并再次执行“预测先密封、标签后释放”。</span></span></p>
+      </section>
+      <div class="metric-grid">
+        <article class="metric-card metric-primary">
+          <span class="metric-label">MACRO-F1</span>
+          <strong id="macroF1">—</strong>
+          <p>固定 0.5 / 0.5 融合</p>
+          <span class="metric-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">ACCURACY</span>
+          <strong id="accuracy">—</strong>
+          <p><b id="recordCount">—</b> 条真实记录全部保留</p>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">DELTA VS BEST BASELINE</span>
+          <strong id="deltaBaseline">—</strong>
+          <p>基线 <b id="baselineF1">—</b></p>
+        </article>
+        <article class="metric-card metric-amber">
+          <span class="metric-label">RETAINED ERRORS</span>
+          <strong id="errorCount">—</strong>
+          <p>难样本一条不少</p>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">QLP COVERAGE</span>
+          <strong id="qlpAvailable">—</strong>
+          <p>完整 <b id="qlpComplete">—</b></p>
+        </article>
+        <article class="metric-card metric-cyan">
+          <span class="metric-label">P5 REPLAY</span>
+          <strong id="replaySeconds">—</strong>
+          <p>当前机器确定性重算</p>
+        </article>
+      </div>
+
+      <section class="pixel-development" id="pixelDevelopment" data-state="unavailable" aria-labelledby="pixelDevelopmentTitle">
+        <header>
+          <div><small>PIXEL ABLATION · POST-RELEASE DEVELOPMENT_ONLY</small><h3 id="pixelDevelopmentTitle">Pixel 链路已打通，但性能结论单独裁决</h3></div>
+          <span id="pixelDevelopmentState" role="status" aria-live="polite">API 未提供 Pixel 开发消融</span>
+        </header>
+        <div class="pixel-evidence-separation">
+          <article class="pixel-engineering-evidence">
+            <small>ENGINEERING EVIDENCE</small>
+            <h4>执行与独立验证</h4>
+            <dl>
+              <div><dt>EXECUTION</dt><dd id="pixelExecutionState" data-state="unavailable">NO API</dd></div>
+              <div><dt>VERIFY-ONLY</dt><dd id="pixelVerificationState" data-state="unavailable">NO API</dd></div>
+            </dl>
+            <p id="pixelEngineeringSummary">只有 API 绑定真实运行与验证 receipt 后才显示 PASS。</p>
+          </article>
+          <article class="pixel-scientific-evidence">
+            <small>SCIENTIFIC CONCLUSION</small>
+            <h4 id="pixelScientificConclusion">尚无可发布的科学结论</h4>
+            <p>工程执行 / 验证 PASS 不自动等于 accuracy 或 Macro-F1 提升。</p>
+          </article>
+        </div>
+        <dl class="pixel-coverage" aria-label="Pixel 开发消融覆盖与变化计数">
+          <div><dt>固定样本</dt><dd id="pixelSampleCount">—</dd></div>
+          <div><dt>Pixel 可用</dt><dd id="pixelAvailableCount">—</dd></div>
+          <div><dt>Pixel 缺失</dt><dd id="pixelMissingCount">—</dd></div>
+          <div><dt>修复错例</dt><dd id="pixelFixedCount">—</dd></div>
+          <div><dt>新增回退</dt><dd id="pixelRegressionCount">—</dd></div>
+        </dl>
+        <section class="pixel-shift-diagnostics" aria-labelledby="pixelShiftTitle">
+          <div>
+            <small>FEATURE-SHIFT DIAGNOSTICS</small>
+            <h4 id="pixelShiftTitle">训练覆盖到 Sector 4 的可用性与范围漂移</h4>
+          </div>
+          <dl>
+            <div><dt>Pixel 可用性</dt><dd id="pixelAvailabilityShift">—</dd></div>
+            <div><dt>Centroid 超训练范围</dt><dd id="pixelCentroidRangeShift">—</dd></div>
+            <div><dt>Aperture-depth 超训练范围</dt><dd id="pixelApertureRangeShift">—</dd></div>
+          </dl>
+          <p>这些计数是迁移诊断，不是稳健 Pixel 泛化证明。</p>
+        </section>
+        <div class="pixel-comparison-wrap" role="region" aria-label="Baseline 与 Pixel 指标对比，可横向滚动" tabindex="0">
+          <table class="pixel-comparison">
+            <caption>同一固定样本集的 baseline 与 Pixel-enhanced 开发性消融</caption>
+            <thead><tr><th scope="col">METRIC</th><th scope="col">BASELINE</th><th scope="col">PIXEL</th><th scope="col">DELTA</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Macro-F1</th><td id="pixelBaselineMacroF1">—</td><td id="pixelEnhancedMacroF1">—</td><td id="pixelDeltaMacroF1">—</td></tr>
+              <tr><th scope="row">Accuracy</th><td id="pixelBaselineAccuracy">—</td><td id="pixelEnhancedAccuracy">—</td><td id="pixelDeltaAccuracy">—</td></tr>
+              <tr><th scope="row">Log-loss ↓</th><td id="pixelBaselineLogLoss">—</td><td id="pixelEnhancedLogLoss">—</td><td id="pixelDeltaLogLoss">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <details class="pixel-hash-details" id="pixelHashDetails">
+          <summary>展开五段执行闭环与两段 TESSCut 来源 provenance</summary>
+          <dl>
+            <div><dt>REPORT</dt><dd><code id="pixelReportHash">—</code></dd></div>
+            <div><dt>PREDICTION MANIFEST</dt><dd><code id="pixelPredictionManifestHash">—</code></dd></div>
+            <div><dt>EVALUATION MANIFEST</dt><dd><code id="pixelEvaluationManifestHash">—</code></dd></div>
+            <div><dt>VERIFICATION RECEIPT</dt><dd><code id="pixelVerificationReceiptHash">—</code></dd></div>
+            <div><dt>VERIFICATION MANIFEST</dt><dd><code id="pixelVerificationManifestHash">—</code></dd></div>
+          </dl>
+          <section class="pixel-source-provenance" aria-labelledby="pixelSourceProvenanceTitle">
+            <div><small>SOURCE PROVENANCE · NOT PROVIDER SIGNATURE</small><h4 id="pixelSourceProvenanceTitle">TESSCut acquisition 来源绑定</h4></div>
+            <dl>
+              <div><dt>ACQUISITION RECEIPT</dt><dd><code id="pixelTesscutReceiptHash">—</code></dd></div>
+              <div><dt>ACQUISITION MANIFEST</dt><dd><code id="pixelTesscutManifestHash">—</code></dd></div>
+            </dl>
+            <p id="pixelAcquisitionProvenanceBoundary">API 未公开 TESSCut 来源 provenance；页面不推断供应商认证，也不提供原始 FITS。</p>
+          </section>
+        </details>
+        <p class="pixel-development-boundary"><span aria-hidden="true">!</span><span id="pixelDevelopmentBoundary">安全降级：当前证据 API 没有绑定 Pixel 开发消融。页面不填入默认成绩，也不把工程可运行性解释成性能提升。</span></p>
+      </section>
+
+      <section class="qwen-vl-benchmark" id="qwenVlBenchmark" data-state="unavailable" aria-labelledby="qwenVlTitle">
+        <header>
+          <div><small>DIRECT MULTIMODAL QWEN · DEVELOPMENT BENCHMARK</small><h3 id="qwenVlTitle">Qwen-VL 直接看真实光变图</h3></div>
+          <span id="qwenVlState" role="status" aria-live="polite">API 未提供基准</span>
+        </header>
+        <dl class="qwen-vl-metrics">
+          <div><dt>样本数</dt><dd id="qwenVlSampleCount">—</dd></div>
+          <div><dt>MACRO-F1</dt><dd id="qwenVlMacroF1">—</dd></div>
+          <div><dt>ACCURACY</dt><dd id="qwenVlAccuracy">—</dd></div>
+          <div><dt>QWEN 错例</dt><dd id="qwenVlErrorCount">—</dd></div>
+          <div><dt>P5 错例</dt><dd id="qwenVlBaselineErrorCount">—</dd></div>
+          <div><dt>保留的系统错例记录</dt><dd id="qwenVlRetainedErrorCount">—</dd></div>
+          <div><dt>同样本 P5 MACRO-F1</dt><dd id="qwenVlBaselineMacroF1">—</dd></div>
+          <div><dt>QWEN − P5</dt><dd id="qwenVlDeltaMacroF1">—</dd></div>
+        </dl>
+        <section class="qwen-vl-reseal" aria-labelledby="qwenVlResealTitle">
+          <div>
+            <small>CALL RECORD ≠ RESEAL EXECUTION</small>
+            <h4 id="qwenVlResealTitle">原始调用记录与零调用重封分离</h4>
+          </div>
+          <dl>
+            <div><dt>原始记录</dt><dd id="qwenVlOriginalRecord">—</dd></div>
+            <div><dt>当前重封</dt><dd id="qwenVlResealRecord">—</dd></div>
+            <div><dt>样本同一性</dt><dd id="qwenVlResealSamples">—</dd></div>
+          </dl>
+        </section>
+        <div class="qwen-vl-meta">
+          <p><span>数据范围</span><strong id="qwenVlDataset">—</strong></p>
+          <p><span>记录的 provenance</span><strong id="qwenVlCallEvidence">—</strong></p>
+        </div>
+        <p class="qwen-vl-provenance"><span aria-hidden="true">i</span><span id="qwenVlProvenanceBoundary">Request IDs、usage 与 model identifiers 只作为来源追踪记录；它们不是供应商签名，也不构成密码学执行认证。</span></p>
+        <div class="qwen-vl-errors" role="region" aria-label="完整保留的 Qwen 与 P5 系统错例记录，可滚动" tabindex="0">
+          <h4>完整保留的系统错例记录</h4>
+          <ol id="qwenVlErrorList"><li>仅在 API 返回真实基准后展示。</li></ol>
+        </div>
+        <p class="qwen-vl-boundary"><span aria-hidden="true">◇</span><span id="qwenVlBoundary">安全降级：当前证据 API 没有绑定 Qwen-VL 基准，因此页面不展示默认成绩，也不推断多模态能力。</span></p>
+      </section>
+
+      <section class="error-atlas" id="errorAtlas" data-state="unavailable" aria-labelledby="errorAtlasTitle">
+        <header class="error-atlas-head">
+          <div>
+            <small>ERROR ATLAS · CASE-LEVEL MICROSCOPE</small>
+            <h3 id="errorAtlasTitle">错例显微镜：不只数错题，追到下一个可证伪实验</h3>
+          </div>
+          <span id="errorAtlasState" role="status" aria-live="polite">unavailable</span>
+        </header>
+
+        <div class="error-atlas-summary">
+          <p id="errorAtlasSummary">unavailable</p>
+          <dl aria-label="错例显微镜记录概览">
+            <div><dt>ALL</dt><dd id="errorAtlasAllCount">unavailable</dd></div>
+            <div><dt>QWEN</dt><dd id="errorAtlasQwenCount">unavailable</dd></div>
+            <div><dt>PIXEL</dt><dd id="errorAtlasPixelCount">unavailable</dd></div>
+            <div><dt>CROSS-MODAL</dt><dd id="errorAtlasCrossModalCount">unavailable</dd></div>
+          </dl>
+        </div>
+
+        <section class="error-atlas-complementarity" id="errorAtlasComplementarity" data-state="unavailable" aria-labelledby="errorAtlasComplementarityTitle">
+          <header>
+            <div><small>CROSS-MODAL COMPLEMENTARITY · JOINED SUBSET</small><h4 id="errorAtlasComplementarityTitle">Qwen × Pixel 互补矩阵</h4></div>
+            <span><b id="errorAtlasJoinedCount">unavailable</b> joined</span>
+          </header>
+          <div class="error-atlas-matrix" role="table" aria-label="Qwen 与 Pixel 正确性交叉矩阵">
+            <div class="matrix-corner" role="columnheader">QWEN ↓ / PIXEL →</div>
+            <div role="columnheader">CORRECT</div>
+            <div role="columnheader">WRONG</div>
+            <div role="rowheader">CORRECT</div>
+            <div role="cell"><strong id="errorAtlasBothCorrect">unavailable</strong><span>两路都对</span></div>
+            <div role="cell"><strong id="errorAtlasQwenCorrectPixelWrong">unavailable</strong><span>Qwen 独立救回</span></div>
+            <div role="rowheader">WRONG</div>
+            <div role="cell"><strong id="errorAtlasQwenWrongPixelCorrect">unavailable</strong><span>Pixel 独立救回</span></div>
+            <div role="cell"><strong id="errorAtlasBothWrong">unavailable</strong><span>两路都错</span></div>
+          </div>
+          <aside class="error-atlas-oracle">
+            <div><small>EITHER-CORRECT ORACLE</small><strong id="errorAtlasOracleRate">unavailable</strong><span><b id="errorAtlasOracleCount">unavailable</b> cases</span></div>
+            <p><strong>诊断上界，不可部署。</strong><span id="errorAtlasOracleBoundary">unavailable</span></p>
+          </aside>
+        </section>
+
+        <form class="error-atlas-filters" id="errorAtlasFilters" aria-label="筛选错例" autocomplete="off">
+          <fieldset>
+            <legend>错误模态</legend>
+            <div class="error-atlas-modality" role="radiogroup" aria-label="Qwen、Pixel 或交叉模态">
+              <button type="button" data-error-atlas-modality="all" role="radio" aria-checked="true" tabindex="0">全部</button>
+              <button type="button" data-error-atlas-modality="qwen" role="radio" aria-checked="false" tabindex="-1">Qwen</button>
+              <button type="button" data-error-atlas-modality="pixel" role="radio" aria-checked="false" tabindex="-1">Pixel</button>
+              <button type="button" data-error-atlas-modality="cross_modal" role="radio" aria-checked="false" tabindex="-1">交叉模态</button>
+            </div>
+          </fieldset>
+          <label>
+            <span>真实类</span>
+            <select id="errorAtlasTruthFilter"><option value="all">全部真实类</option></select>
+          </label>
+          <label>
+            <span>错误 TAXONOMY</span>
+            <select id="errorAtlasTaxonomyFilter"><option value="all">全部 taxonomy</option></select>
+          </label>
+          <label>
+            <span>PIXEL 状态 / 变化</span>
+            <select id="errorAtlasPixelFilter">
+              <option value="all">全部 Pixel 状态</option>
+              <option value="missing">missing</option>
+              <option value="fixed">fixed</option>
+              <option value="regression">regression</option>
+              <option value="out_of_range">feature out-of-range</option>
+            </select>
+          </label>
+          <label class="error-atlas-search">
+            <span>Sample / TIC 检索</span>
+            <input id="errorAtlasSearch" type="search" inputmode="search" placeholder="输入 sample 或 TIC" aria-describedby="errorAtlasResultCount">
+          </label>
+        </form>
+
+        <p class="error-atlas-result-count" id="errorAtlasResultCount" aria-live="polite">unavailable</p>
+        <div class="error-atlas-workbench">
+          <section class="error-atlas-list-panel" aria-labelledby="errorAtlasListTitle">
+            <div class="error-atlas-panel-title">
+              <small>CASE INDEX</small>
+              <h4 id="errorAtlasListTitle">可选错例</h4>
+            </div>
+            <ol class="error-atlas-records" id="errorAtlasRecords" role="listbox" aria-label="筛选后的错例记录">
+              <li class="error-atlas-empty">unavailable</li>
+            </ol>
+          </section>
+
+          <article class="error-atlas-detail" id="errorAtlasDetail" data-state="empty" aria-labelledby="errorAtlasDetailTitle">
+            <header>
+              <div><small>SELECTED CASE</small><h4 id="errorAtlasDetailTitle">unavailable</h4></div>
+              <span id="errorAtlasDetailModality">unavailable</span>
+            </header>
+            <dl class="error-atlas-facts">
+              <div><dt>SAMPLE</dt><dd id="errorAtlasDetailSample">unavailable</dd></div>
+              <div><dt>TIC</dt><dd id="errorAtlasDetailTic">unavailable</dd></div>
+              <div><dt>真实类</dt><dd id="errorAtlasDetailTruth">unavailable</dd></div>
+              <div><dt>BASELINE 预测</dt><dd id="errorAtlasDetailBaseline">unavailable</dd></div>
+              <div><dt>PIXEL-ENHANCED 预测</dt><dd id="errorAtlasDetailPixel">unavailable</dd></div>
+              <div><dt>QWEN-VL 预测</dt><dd id="errorAtlasDetailQwen">unavailable</dd></div>
+              <div><dt>PIXEL 特征</dt><dd id="errorAtlasDetailPixelState">unavailable</dd></div>
+              <div><dt>变化类型</dt><dd id="errorAtlasDetailOutcome">unavailable</dd></div>
+              <div><dt>ERROR TAXONOMY</dt><dd id="errorAtlasDetailTaxonomy">unavailable</dd></div>
+            </dl>
+            <section class="error-atlas-range" aria-labelledby="errorAtlasRangeTitle">
+              <span aria-hidden="true">↗</span>
+              <div><small>FEATURE RANGE CHECK</small><h5 id="errorAtlasRangeTitle">特征越界</h5><p id="errorAtlasDetailRange">unavailable</p></div>
+            </section>
+            <section class="error-atlas-boundary" aria-labelledby="errorAtlasBoundaryTitle">
+              <span aria-hidden="true">!</span>
+              <div><small>SCIENTIFIC BOUNDARY</small><h5 id="errorAtlasBoundaryTitle">这条记录允许说什么</h5><p id="errorAtlasDetailBoundary">unavailable</p></div>
+            </section>
+
+            <section class="error-atlas-next" aria-labelledby="errorAtlasNextTitle">
+              <div class="error-atlas-panel-title">
+                <small>FALSIFIABLE NEXT STEP</small>
+                <h4 id="errorAtlasNextTitle">可证伪后续实验</h4>
+              </div>
+              <ol id="errorAtlasExperiments"><li>unavailable</li></ol>
+            </section>
+
+            <button class="error-atlas-send" id="sendErrorAtlasToJudgeLab" type="button" disabled>
+              <span aria-hidden="true">↳</span>
+              <span>送入 Judge Lab</span>
+              <small>只预填表单 · 不自动调用 API</small>
+            </button>
+            <p class="error-atlas-announcer" id="errorAtlasAnnouncer" aria-live="polite"></p>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="pipeline-section section-shell" aria-labelledby="pipelineTitle">
+      <div class="section-heading">
+        <div><span class="section-index">02</span><p>VERTICAL SCIENCE CHAIN</p></div>
+        <h2 id="pipelineTitle">从一颗星，到一个程序认可的结论</h2>
+        <p>每个节点都从同一份真实 receipt 取状态。模型负责提出与质疑，普通程序负责最终放行。</p>
+      </div>
+
+      <ol class="pipeline scientific-chain" id="scientificChain" aria-label="六段可点击科学证据链">
+        <li class="pipeline-node" data-science-chain="source_facts" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="true" aria-current="step" tabindex="0">
+            <span class="node-number">01</span><span class="node-icon" aria-hidden="true">✦</span>
+            <span class="node-copy"><small>SOURCE / FACTS</small><strong>原文 / 事实</strong><span>逐字引文、来源与哈希</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+        <li class="pipeline-node" data-science-chain="hypothesis" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="false" tabindex="-1">
+            <span class="node-number">02</span><span class="node-icon" aria-hidden="true">◇</span>
+            <span class="node-copy"><small>FALSIFIABLE CLAIM</small><strong>假设</strong><span>可证伪预测与混淆项</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+        <li class="pipeline-node" data-science-chain="experiment" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="false" tabindex="-1">
+            <span class="node-number">03</span><span class="node-icon" aria-hidden="true">⌁</span>
+            <span class="node-copy"><small>FIXED PROTOCOL</small><strong>实验</strong><span>冻结模型、对照与评估协议</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+        <li class="pipeline-node" data-science-chain="local_result" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="false" tabindex="-1">
+            <span class="node-number">04</span><span class="node-icon" aria-hidden="true">✓</span>
+            <span class="node-copy"><small>LOCAL RESULT</small><strong>本地结果</strong><span>指标与全部保留错例</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+        <li class="pipeline-node" data-science-chain="sector4_stress_test" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="false" tabindex="-1">
+            <span class="node-number">05</span><span class="node-icon" aria-hidden="true">↗</span>
+            <span class="node-copy"><small>EXTERNAL STRESS TEST</small><strong>Sector 4 压力测试</strong><span>预测先密封、标签后释放</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+        <li class="pipeline-node" data-science-chain="verdict" data-state="pending">
+          <button class="chain-trigger" type="button" aria-controls="scientificChainDetail" aria-expanded="false" tabindex="-1">
+            <span class="node-number">06</span><span class="node-icon" aria-hidden="true">◆</span>
+            <span class="node-copy"><small>PROGRAM VERDICT</small><strong>Verdict</strong><span>证据边界与发布资格</span></span>
+            <span class="node-state">WAIT</span>
+          </button>
+        </li>
+      </ol>
+
+      <article class="scientific-chain-detail" id="scientificChainDetail" aria-labelledby="scientificChainDetailTitle" tabindex="-1">
+        <header>
+          <div><small id="scientificChainDetailIndex">01 / SOURCE / FACTS</small><h3 id="scientificChainDetailTitle">原文 / 事实</h3></div>
+          <span id="scientificChainDetailState" data-state="pending">WAIT</span>
+        </header>
+        <p id="scientificChainDetailSummary">等待 API 返回后端硬校验的科学链条；页面不会用占位数字补齐缺失证据。</p>
+        <div class="scientific-chain-detail-grid">
+          <section aria-labelledby="scientificChainEvidenceTitle"><h4 id="scientificChainEvidenceTitle">本段证据</h4><ul id="scientificChainEvidence"><li>尚未载入</li></ul></section>
+          <section aria-labelledby="scientificChainMetricsTitle"><h4 id="scientificChainMetricsTitle">API 数值 / 哈希</h4><dl id="scientificChainMetrics"><div><dt>状态</dt><dd>尚未载入</dd></div></dl></section>
+        </div>
+        <p class="scientific-chain-announcer" id="scientificChainAnnouncer" aria-live="polite"></p>
+      </article>
+
+      <div class="run-console" aria-labelledby="activityTitle">
+        <div class="console-header">
+          <div><i></i><i></i><i></i></div>
+          <span id="activityTitle">ASTROTWIN / LIVE ACTIVITY</span>
+          <span class="console-stage" id="consoleStage">READY</span>
+        </div>
+        <div class="console-body">
+          <div class="console-status">
+            <span class="console-symbol" aria-hidden="true">›</span>
+            <p id="runMessage" aria-live="polite">正在载入真实证据包…</p>
+          </div>
+          <ol id="activityList" class="activity-list" aria-label="运行活动记录"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="agents-section" aria-labelledby="agentsTitle">
+      <div class="section-shell agents-shell">
+        <div class="section-heading light">
+          <div><span class="section-index">03</span><p>QWEN SCIENTIST TEAM</p></div>
+          <h2 id="agentsTitle">不是一个聊天框，是一支会互相质疑的科学队伍</h2>
+          <p>科学角色与模型路由来自真实 Qwen 运行 receipt；当前页面只核验证据，不重新发起网络调用。</p>
+        </div>
+        <div class="agent-grid" id="agentGrid" aria-live="polite">
+          <article class="agent-card agent-placeholder"><span></span><p>正在载入角色证据</p></article>
+        </div>
+        <div class="agent-summary">
+          <div><strong id="qwenRoleCount">—</strong><span>个真实角色调用</span></div>
+          <div><strong id="qwenProvider">—</strong><span>国产模型服务路由</span></div>
+          <div><strong id="qwenOrigin">—</strong><span>证据来源</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="brand footer-brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><span><strong>ASTROTWIN</strong><small>REAL DATA · REAL VERDICT · REPLAYABLE PROOF</small></span></div>
+    <p id="footerScope">等待真实 receipt…</p>
+  </footer>
+
+  <dialog class="evidence-dialog" id="evidenceDialog" aria-labelledby="evidenceTitle">
+    <div class="dialog-head">
+      <div><p>TECHNICAL JUDGE VIEW</p><h2 id="evidenceTitle">SHA-256 证据舱</h2></div>
+      <button class="dialog-close" id="closeEvidence" type="button" aria-label="关闭证据舱">×</button>
+    </div>
+    <div class="dialog-status" id="dialogStatus" data-state="pending">
+      <span aria-hidden="true">◆</span><strong id="dialogStatusText">正在读取证据</strong>
+      <small id="dialogPackage">—</small>
+    </div>
+    <section class="evidence-actions" aria-labelledby="evidenceActionsTitle">
+      <div><small>LOCAL CONTROL</small><h3 id="evidenceActionsTitle">验真与离线回放</h3></div>
+      <div>
+        <button class="primary-button" id="startDemo" type="button" disabled><span class="play-icon" aria-hidden="true">▶</span><span>启动离线演示</span></button>
+        <button class="secondary-button" id="verifyEvidence" type="button" disabled><span aria-hidden="true">✓</span><span>现场验真</span></button>
+      </div>
+    </section>
+    <section class="lab-recovery evidence-recovery" id="labRecovery" data-state="idle" aria-labelledby="labRecoveryTitle">
+      <div class="lab-recovery-head">
+        <div><small>CHECKPOINT RECOVERY</small><h3 id="labRecoveryTitle">Judge Lab 运行恢复</h3></div>
+        <span id="labRecoveryState" role="status" aria-live="polite">没有可恢复任务</span>
+      </div>
+      <dl>
+        <div><dt>RUN ID</dt><dd><code id="labResumeRunId">—</code></dd></div>
+        <div><dt>已验证 checkpoint</dt><dd id="labCheckpointCount">—</dd></div>
+        <div><dt>原始绝对截止时间</dt><dd><time id="labOriginalDeadline">—</time></dd></div>
+      </dl>
+      <button class="lab-resume" id="resumeJudgeLab" type="button" disabled><span aria-hidden="true">↻</span><span>使用新 Key 恢复同一任务</span></button>
+      <p id="labRecoveryHint">恢复只复用服务端验真的 checkpoint；不会恢复 Key，也不会自动填充人工质疑或资料。</p>
+    </section>
+    <section class="evidence-faults" aria-labelledby="faultTitle">
+      <div class="fault-copy">
+        <div class="section-heading compact"><div><span class="section-index">TECH</span><p>FAIL-CLOSED ENGINEERING</p></div><h3 id="faultTitle">故障演练记录</h3><p>工程防线保留在技术视图，不占据主页科学阅读路径。</p></div>
+        <div class="fault-total"><strong id="faultCases">—</strong><span>类故障演练</span></div>
+      </div>
+      <div class="fault-wall">
+        <div class="fault-orb" aria-hidden="true"><span id="faultOrbNumber">—</span><small>SAFE</small></div>
+        <div class="fault-dots" id="faultDots" aria-label="故障演练结果"></div>
+        <dl class="fault-legend">
+          <div><dt><i class="legend-fail"></i>安全失败</dt><dd id="safeFailures">—</dd></div>
+          <div><dt><i class="legend-block"></i>安全阻断</dt><dd id="safeBlocked">—</dd></div>
+          <div><dt><i class="legend-recover"></i>安全恢复</dt><dd id="safeRecovery">—</dd></div>
+          <div class="no-partial"><dt>可发布半成品</dt><dd id="partialCount">—</dd></div>
+        </dl>
+      </div>
+    </section>
+    <div class="hash-hero">
+      <span>PACKAGE MANIFEST SHA-256</span>
+      <button type="button" class="copy-hash" id="copyManifest" aria-label="复制 package manifest SHA-256"><code id="manifestFull">—</code><b>复制</b></button>
+    </div>
+    <div class="binding-summary" id="bindingSummary"></div>
+    <div class="hash-groups" id="hashGroups"></div>
+    <section class="reproduce-block" aria-labelledby="reproduceTitle">
+      <h3 id="reproduceTitle">完整复现命令</h3>
+      <div><span>NEW REPLAY</span><pre><code id="runCommand">—</code></pre></div>
+      <div><span>VERIFY THIS PACKAGE</span><pre><code id="verifyCommand">—</code></pre></div>
+    </section>
+    <button class="proof-button evidence-close-cta" id="openEvidenceBottom" type="button"><span>证据舱已打开</span><b aria-hidden="true">✓</b></button>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="static-api.js?v=20260904a" defer></script>
+  <script src="app.js?v=20260904a" defer></script>
+</body>
+</html>

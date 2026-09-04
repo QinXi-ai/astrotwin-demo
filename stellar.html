@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://dashscope.aliyuncs.com; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="theme-color" content="#01030a">
+  <meta name="description" content="AstroTwin 光子法庭：真实 TESS 双 Boss 多模态科学对决">
+  <title>AstroTwin · 光子法庭</title>
+  <link rel="icon" href="assets/astrotwin-hero-v1.png" type="image/png">
+  <link rel="stylesheet" href="styles.css?v=20260829a">
+  <link rel="stylesheet" href="stellar-stage.css?v=20260829b">
+</head>
+<body class="stellar-page stellar-court-page">
+  <a class="skip-link" href="#photonCourt">跳到光子法庭</a>
+
+  <header class="stellar-page-topbar">
+    <a class="stellar-page-back" href="index.html"><span aria-hidden="true">←</span><span>返回 AstroTwin 主页</span></a>
+    <div class="stellar-page-brand"><i aria-hidden="true"></i><span><strong>PHOTON COURT</strong><small>REAL TESS × QWEN × PIXEL</small></span></div>
+    <div class="stellar-page-actions">
+      <button class="court-xray-toggle" id="courtXrayToggle" type="button" aria-controls="courtXray" aria-expanded="false"><span aria-hidden="true">⌁</span><span>技术 X-Ray</span></button>
+      <div class="stellar-page-evidence" id="stellarPageEvidence" data-state="loading"><i aria-hidden="true"></i><span>正在核验证据</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="stellar-twin-stage stellar-page-stage" id="stellarTwinStage" data-state="loading" aria-labelledby="stellarTwinTitle">
+      <div class="stellar-page-milkyway" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="stellar-page-title">
+        <p class="eyebrow"><span></span> XH-202619 · COUNTERFACTUAL SCIENCE DUEL · PUBLIC SNAPSHOT</p>
+        <h1 id="stellarTwinTitle">同一束星光，<br><em>两种相反真相。</em></h1>
+        <p>评委先押注 · AI 再出庭 · Qwen 与 Pixel 完成跨模态反杀</p>
+      </div>
+
+      <div class="stellar-twin-console">
+        <div class="stellar-twin-viewport" id="stellarTwinViewport">
+          <canvas id="stellarTwinCanvas" role="img" aria-label="真实 TESS 证据驱动的恒星数字孪生正在加载" aria-describedby="stellarTwinSummary">
+            此浏览器不支持 Canvas。下方文本仍会展示当前真实样本、观测扇区、周期、光变范围与证据哈希。
+          </canvas>
+
+          <div class="stellar-twin-loading" id="stellarTwinLoading" role="status" aria-live="polite">
+            <span class="stellar-loader-orbit" aria-hidden="true"><i></i><i></i><i></i></span>
+            <strong>正在装配真实恒星孪生体</strong>
+            <small>VERIFYING TESS EVIDENCE · BUILDING CINEMA SHADER</small>
+          </div>
+          <div class="stellar-twin-failure" id="stellarTwinFailure" role="alert" hidden>
+            <span aria-hidden="true">!</span>
+            <strong>证据校验未通过，孪生体拒绝渲染</strong>
+            <small>FAIL-CLOSED · UNVERIFIED STAR BLOCKED</small>
+          </div>
+
+          <div class="stellar-twin-reticle" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="stellar-twin-coordinate stellar-twin-coordinate-left" aria-hidden="true">TESS / PHOTOMETRIC SPACE</div>
+          <div class="stellar-twin-coordinate stellar-twin-coordinate-right" aria-hidden="true">DRAG TO ORBIT · SCROLL TO FOCUS</div>
+
+          <aside class="stellar-twin-hud" aria-label="当前恒星真实证据">
+            <div class="stellar-twin-hud-head"><span><i aria-hidden="true"></i> EVIDENCE LINK</span><b id="stellarTwinMode">LOADING</b></div>
+            <dl>
+              <div><dt>样本</dt><dd id="stellarTwinObject">—</dd></div>
+              <div><dt>SECTOR</dt><dd id="stellarTwinSector">—</dd></div>
+              <div><dt>PERIOD</dt><dd id="stellarTwinPeriod">—</dd></div>
+              <div><dt>FLUX SPAN</dt><dd id="stellarTwinFlux">—</dd></div>
+              <div class="stellar-twin-hash"><dt>FITS SHA-256</dt><dd><code id="stellarTwinFitsHash">—</code></dd></div>
+            </dl>
+          </aside>
+          <div class="stellar-twin-caption"><span>OBSERVATION</span><i aria-hidden="true"></i><span>PHASE</span><i aria-hidden="true"></i><span>MODEL</span></div>
+
+          <section class="photon-court" id="photonCourt" data-state="loading" data-court-step="ready" aria-labelledby="courtTitle">
+            <header class="court-control-bar">
+              <div><small id="courtStepIndex">00 / EVIDENCE LOCK</small><strong id="courtStepLabel">正在装载两颗真实目标</strong></div>
+              <div class="court-progress" aria-label="光子法庭六幕进度"><i data-court-progress="observe"></i><i data-court-progress="witness"></i><i data-court-progress="pixel"></i><i data-court-progress="verdict"></i><i data-court-progress="population"></i><i data-court-progress="planner"></i></div>
+              <code id="courtRunId">DEVELOPMENT REPLAY</code>
+            </header>
+
+            <div class="court-case-grid">
+              <article class="court-case court-case-a" id="courtCaseA" data-case="a" data-verdict="sealed">
+                <header><div><small>BOSS A / ANONYMOUS TARGET</small><h2 id="courtTitle">哪一颗才是行星候选体？</h2></div><span id="courtTruthA">TRUTH SEALED</span></header>
+                <div class="court-curve-wrap"><canvas id="courtCurveA" width="640" height="230" role="img" aria-label="匿名目标 A 的真实 QLP 相位折叠曲线"></canvas><div class="court-curve-scan" aria-hidden="true"></div><small id="courtCurveMetaA">QLP · WAITING</small></div>
+                <div class="court-witnesses" aria-label="目标 A 三路模型证词">
+                  <div data-route="baseline"><span>BASELINE</span><strong id="courtBaselineA">SEALED</strong><small id="courtBaselineConfA">—</small></div>
+                  <div data-route="qwen"><span>QWEN-VL</span><strong id="courtQwenA">SEALED</strong><small id="courtQwenConfA">—</small></div>
+                  <div data-route="pixel"><span>PIXEL</span><strong id="courtPixelA">SEALED</strong><small id="courtPixelConfA">—</small></div>
+                </div>
+                <div class="court-pixel-wrap"><canvas id="courtPixelCanvasA" width="320" height="320" role="img" aria-label="目标 A 的真实 TESSCut 20×20 事件差分图"></canvas><span class="court-pixel-crosshair" aria-hidden="true"></span><div><small>DIFFERENCE IMAGE</small><strong id="courtPixelMetricA">20×20 × 1060</strong><span id="courtCentroidA">Δ-centroid sealed</span></div></div>
+                <fieldset class="court-surgery" data-surgery-case="a"><legend>反事实模态手术</legend><label><input type="checkbox" value="baseline" checked> Baseline</label><label><input type="checkbox" value="qwen" checked> Qwen</label><label><input type="checkbox" value="pixel" checked> Pixel</label><output id="courtSurgeryA">等待裁决</output></fieldset>
+                <div class="court-rescue-tag" id="courtRescueA">QWEN RESCUE</div>
+              </article>
+
+              <article class="court-case court-case-b" id="courtCaseB" data-case="b" data-verdict="sealed">
+                <header><div><small>BOSS B / ANONYMOUS TARGET</small><h2>哪一种证据值得相信？</h2></div><span id="courtTruthB">TRUTH SEALED</span></header>
+                <div class="court-curve-wrap"><canvas id="courtCurveB" width="640" height="230" role="img" aria-label="匿名目标 B 的真实 QLP 相位折叠曲线"></canvas><div class="court-curve-scan" aria-hidden="true"></div><small id="courtCurveMetaB">QLP · WAITING</small></div>
+                <div class="court-witnesses" aria-label="目标 B 三路模型证词">
+                  <div data-route="baseline"><span>BASELINE</span><strong id="courtBaselineB">SEALED</strong><small id="courtBaselineConfB">—</small></div>
+                  <div data-route="qwen"><span>QWEN-VL</span><strong id="courtQwenB">SEALED</strong><small id="courtQwenConfB">—</small></div>
+                  <div data-route="pixel"><span>PIXEL</span><strong id="courtPixelB">SEALED</strong><small id="courtPixelConfB">—</small></div>
+                </div>
+                <div class="court-pixel-wrap"><canvas id="courtPixelCanvasB" width="320" height="320" role="img" aria-label="目标 B 的真实 TESSCut 20×20 事件差分图"></canvas><span class="court-pixel-crosshair" aria-hidden="true"></span><div><small>DIFFERENCE IMAGE</small><strong id="courtPixelMetricB">20×20 × 1060</strong><span id="courtCentroidB">Δ-centroid sealed</span></div></div>
+                <fieldset class="court-surgery" data-surgery-case="b"><legend>反事实模态手术</legend><label><input type="checkbox" value="baseline" checked> Baseline</label><label><input type="checkbox" value="qwen" checked> Qwen</label><label><input type="checkbox" value="pixel" checked> Pixel</label><output id="courtSurgeryB">等待裁决</output></fieldset>
+                <div class="court-rescue-tag" id="courtRescueB">PIXEL RESCUE</div>
+              </article>
+            </div>
+
+            <ol class="court-agent-rail" aria-label="AI Scientist 多智能体科研链">
+              <li data-court-agent="vision"><span>VIS</span><strong>视觉科学家</strong><small>Qwen-VL 读曲线</small></li>
+              <li data-court-agent="hypothesis"><span>HYP</span><strong>假设生成器</strong><small>提出 PC / EB</small></li>
+              <li data-court-agent="critic"><span>CRIT</span><strong>反方审稿人</strong><small>要求空间证据</small></li>
+              <li data-court-agent="experiment"><span>EXP</span><strong>实验设计师</strong><small>锁定事件窗</small></li>
+              <li data-court-agent="pixel"><span>PIX</span><strong>Pixel 执行器</strong><small>差分质心</small></li>
+              <li data-court-agent="judge"><span>JDG</span><strong>程序裁决器</strong><small>标签揭晓</small></li>
+              <li data-court-agent="document"><span>DOC</span><strong>研究规划器</strong><small>下一束光</small></li>
+            </ol>
+
+            <div class="court-launch" id="courtLaunchPanel">
+              <p><span aria-hidden="true">●</span> TWO BOSS CASES READY</p>
+              <h2>两条几乎一样的曲线，<br>藏着相反的真相。</h2>
+              <p>先押哪颗是行星候选体。随后让三位 AI 证人出庭，再释放真实空间光子。</p>
+              <div class="court-vote" role="group" aria-label="选择你认为的行星候选体"><button type="button" data-court-vote="a">我押目标 A</button><button type="button" data-court-vote="b">我押目标 B</button><button type="button" data-court-vote="none">都不押</button></div>
+              <button class="court-launch-button" id="courtLaunch" type="button" disabled><span aria-hidden="true"><i></i><i></i></span><span><strong>封盘 · 释放隐藏光子</strong><small>START THE 55s PHOTON VERDICT</small></span></button>
+              <small>真实 Sector 4 证据重演 · 双 Boss → 总体检验 → 下一观测</small>
+            </div>
+
+            <div class="court-verdict" id="courtVerdict" aria-hidden="true">
+              <span>THE PHOTONS HAVE SPOKEN</span><h2>没有万能模态。<br><em>只有下一条正确证据。</em></h2><p id="courtVerdictCopy">A 由 Qwen 独立救回；B 由 Pixel 独立救回。</p>
+              <button id="courtRunPopulation" type="button">把两个 Boss 放回 40 颗星里重算 ↳</button>
+            </div>
+
+            <section class="court-population" id="courtPopulation" data-state="idle" aria-labelledby="courtPopulationTitle" aria-hidden="true">
+              <header><div><small>FUNCTION 02 / POPULATION TEST</small><h2 id="courtPopulationTitle">把 Boss 放回 40 颗星。</h2></div><span id="courtPopulationState">WAIT</span></header>
+              <div class="court-population-board" id="courtPopulationBoard" aria-label="40 个 Qwen 与 Pixel 联表对象的互补性结果"></div>
+              <dl><div><dt>双方都对</dt><dd id="courtBothCorrect">—</dd></div><div><dt>仅 Pixel 救回</dt><dd id="courtPixelOnly">—</dd></div><div><dt>仅 Qwen 救回</dt><dd id="courtQwenOnly">—</dd></div><div><dt>双方都错</dt><dd id="courtBothWrong">—</dd></div></dl>
+              <p id="courtPopulationFinding">将从当前已验真的 40 条共同 cohort 现场重算。</p>
+              <button id="courtOpenPlanner" type="button" disabled>让 AI 决定下一束光看哪里 ↳</button>
+            </section>
+
+            <section class="court-planner" id="courtPlanner" data-state="idle" aria-labelledby="courtPlannerTitle" aria-hidden="true">
+              <header><div><small>FUNCTION 03 / ACTIVE OBSERVATION</small><h2 id="courtPlannerTitle">下一观测规划器</h2></div><span>LABEL-FREE RANKING</span></header>
+              <p>融合 Baseline + Pixel 的混合熵、JS 分歧、低置信度与 Pixel 证据风险，为有限 Qwen 预算排序最值得复核的目标。</p>
+              <label class="court-budget"><span>Qwen 复核预算</span><input id="courtBudget" type="range" min="1" max="15" value="5"><output id="courtBudgetValue">5 targets</output></label>
+              <button id="courtRunPlanner" type="button">生成下一观测队列</button>
+              <ol id="courtPlannerQueue" class="court-planner-queue"><li>等待规划</li></ol>
+              <button id="courtRevealPlan" type="button" disabled>回放历史结果 · 计算观测收益</button>
+              <p id="courtPlanOutcome">设置预算，生成下一观测序列。</p>
+              <button id="courtReplay" type="button">重新开庭 ↻</button>
+            </section>
+
+            <aside class="court-xray" id="courtXray" aria-labelledby="courtXrayTitle" aria-hidden="true">
+              <header><div><small>TECHNICAL DEPTH / LIVE</small><h2 id="courtXrayTitle">技术 X-Ray</h2></div><button id="courtXrayClose" type="button" aria-label="关闭技术 X-Ray">×</button></header>
+              <p>每一幕都对应真实计算层。这里展示张量、公式、耗时和数据边界，不用架构图冒充技术。</p>
+              <ol>
+                <li data-xray-stage="observe"><span>01</span><div><strong>QLP 时序与相位折叠</strong><small id="courtXrayPhase">2 × real cadence series</small></div></li>
+                <li data-xray-stage="witness"><span>02</span><div><strong>Qwen-VL 历史实跑</strong><small id="courtXrayQwen">qwen-vl-max · request receipts</small></div></li>
+                <li data-xray-stage="pixel"><span>03</span><div><strong>TESSCut Pixel 张量</strong><small id="courtXrayTensor">2 × 1060 × 20 × 20</small></div></li>
+                <li data-xray-stage="pixel"><span>04</span><div><strong>事件/参考差分与质心</strong><small id="courtXrayFeatures">median stack · Δ-centroid · r2/r4/r6</small></div></li>
+                <li data-xray-stage="population"><span>05</span><div><strong>40 样本配对统计</strong><small>Exact McNemar · 5,000 group bootstrap</small></div></li>
+                <li data-xray-stage="planner"><span>06</span><div><strong>主动观测规划</strong><small>40% entropy + 30% JS + 20% low confidence + 10% Pixel risk</small></div></li>
+              </ol>
+              <footer><span>NO SYNTHETIC OBSERVATION</span><code id="courtAssetHash">P07 RECEIPT BOUND</code></footer>
+            </aside>
+            <p class="court-announcer" id="courtAnnouncer" aria-live="polite">真实证据加载完成后可启动光子法庭。</p>
+          </section>
+        </div>
+
+        <aside class="stellar-twin-story" aria-labelledby="stellarTwinHeadline">
+          <div class="stellar-twin-story-index"><span>ASTROTWIN CORE</span><b>01</b></div>
+          <div class="stellar-render-deck" aria-label="恒星渲染控制台">
+            <div class="stellar-render-row"><span>RENDER</span><div role="group" aria-label="渲染质量">
+              <button type="button" data-stellar-quality="cinema" aria-pressed="false">电影</button>
+              <button type="button" data-stellar-quality="balanced" aria-pressed="true">流畅</button>
+              <button type="button" data-stellar-quality="safe" aria-pressed="false">安全</button>
+            </div></div>
+            <div class="stellar-render-row"><span>ROTATION</span><div role="group" aria-label="恒星旋转速度">
+              <button type="button" data-stellar-speed="paused" aria-pressed="false">暂停</button>
+              <button type="button" data-stellar-speed="normal" aria-pressed="true">1×</button>
+              <button type="button" data-stellar-speed="fast" aria-pressed="false">2×</button>
+            </div></div>
+            <p><i aria-hidden="true"></i><span id="stellarRenderStatus">流畅级 · 实时证据同步</span></p>
+          </div>
+          <p class="stellar-twin-story-kicker">当前孪生体解释</p>
+          <h2 id="stellarTwinHeadline">等待真实样本进入轨道</h2>
+          <p id="stellarTwinNarrative">只有与当前证据包哈希匹配的点列，才会生成这颗恒星的亮度脉动、周期环与分类光谱。</p>
+          <div class="stellar-twin-legend" aria-label="孪生体视觉编码">
+            <div><i class="twin-legend-flux" aria-hidden="true"></i><span><strong>表面脉动</strong><small>归一化亮度变化</small></span></div>
+            <div><i class="twin-legend-phase" aria-hidden="true"></i><span><strong>轨道光环</strong><small>固定周期与相位</small></span></div>
+            <div><i class="twin-legend-model" aria-hidden="true"></i><span><strong>色彩光谱</strong><small>模型概率与 verdict</small></span></div>
+          </div>
+          <button class="stellar-twin-focus" id="stellarTwinFocusButton" type="button" disabled aria-pressed="false">
+            <span class="stellar-twin-focus-icon" aria-hidden="true"><i></i></span><span><strong>启动 30 秒聚焦</strong><small>自动旋转 · 信号 → 周期 → 模型</small></span>
+          </button>
+          <p class="stellar-twin-disclaimer">视觉形态用于解释观测信号与模型决策，不代表从光变曲线反演出的真实恒星表面。</p>
+        </aside>
+      </div>
+
+      <nav class="stellar-twin-samples" aria-label="选择恒星数字孪生样本">
+        <button type="button" data-stellar-sample="canonical_correct" disabled aria-pressed="false"><span>01</span><i aria-hidden="true"></i><strong>典型正确</strong><small>稳健分类样本</small></button>
+        <button type="button" data-stellar-sample="periodic_binary" disabled aria-pressed="false"><span>02</span><i aria-hidden="true"></i><strong>周期双星</strong><small>轨道节律样本</small></button>
+        <button type="button" data-stellar-sample="hard_error" disabled aria-pressed="false"><span>03</span><i aria-hidden="true"></i><strong>最难错例</strong><small>V → IS 决策冲突</small></button>
+      </nav>
+      <p class="stellar-twin-summary" id="stellarTwinSummary" aria-live="polite">真实证据加载后，这里会提供当前恒星样本、观测扇区、周期、光变范围和模型解释的完整文本替代。</p>
+    </section>
+  </main>
+
+  <script src="static-api.js?v=20260904a" defer></script>
+  <script src="stellar-twin.js?v=20260823j" defer></script>
+  <script src="stellar-stage.js?v=20260904a" defer></script>
+</body>
+</html>
