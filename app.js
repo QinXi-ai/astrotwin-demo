@@ -174,6 +174,101 @@
     if (node) node.textContent = value === null || value === undefined || value === "" ? fallback : String(value);
   }
 
+  function humanizeKey(key) {
+    return String(key).replaceAll("_", " ").replace(/\s+/g, " ").trim();
+  }
+
+  function richElement(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // Structured evidence (boundaries, facts, records) rendered as readable chips instead of "key: value" dumps.
+  // Only inline elements are produced so the output stays valid inside <p> containers.
+  function buildRich(value) {
+    const wrap = richElement("span", "rich");
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        if (item === null || item === undefined || item === "") return;
+        const row = richElement("span", "rich-item");
+        if (isRecord(item) || Array.isArray(item)) row.append(buildRich(item));
+        else row.textContent = String(item);
+        wrap.append(row);
+      });
+      return wrap;
+    }
+    const prose = richElement("span", "rich-prose-group");
+    const meta = richElement("span", "rich-meta");
+    const flags = richElement("span", "rich-flags");
+    Object.entries(value).forEach(([key, item]) => {
+      if (item === null || item === undefined || item === "") return;
+      if (typeof item === "boolean") {
+        const flag = richElement("span", "rich-flag");
+        flag.dataset.on = String(item);
+        flag.append(richElement("b", "", item ? "✓" : "✕"), document.createTextNode(humanizeKey(key)));
+        flags.append(flag);
+      } else if (isRecord(item) || Array.isArray(item) || (typeof item === "string" && item.length > 64)) {
+        const block = richElement("span", "rich-prose");
+        block.append(richElement("i", "", humanizeKey(key)));
+        if (isRecord(item) || Array.isArray(item)) block.append(buildRich(item));
+        else block.append(richElement("span", "", item));
+        prose.append(block);
+      } else {
+        const pair = richElement("span", "rich-kv");
+        pair.append(richElement("i", "", humanizeKey(key)), richElement("b", "", String(item)));
+        meta.append(pair);
+      }
+    });
+    [prose, meta, flags].forEach((group) => { if (group.childNodes.length) wrap.append(group); });
+    return wrap;
+  }
+
+  function renderRich(id, value, fallback = "—") {
+    const node = typeof id === "string" ? $(id) : id;
+    if (!node) return;
+    node.replaceChildren();
+    node.classList.remove("rich-host");
+    if (value === null || value === undefined || value === "") {
+      node.textContent = fallback;
+      return;
+    }
+    if (!isRecord(value) && !Array.isArray(value)) {
+      node.textContent = typeof value === "boolean" ? (value ? "是" : "否") : String(value);
+      return;
+    }
+    node.classList.add("rich-host");
+    node.append(buildRich(value));
+  }
+
+  const QWEN_ERROR_SYSTEMS = { QWEN_VL: "Qwen-VL 读图", P05_FIXED_HALF_BASELINE: "P5 固定融合基线" };
+
+  function renderQwenErrorCard(item, error) {
+    if (!isRecord(error)) {
+      item.textContent = displayValue(error);
+      return;
+    }
+    item.className = "qwen-error-card";
+    item.dataset.system = String(error.system || "");
+    const head = richElement("span", "qwen-error-head");
+    head.append(richElement("span", "qwen-error-system", QWEN_ERROR_SYSTEMS[error.system] || humanizeKey(error.system || "system")));
+    const classes = richElement("span", "qwen-error-classes");
+    classes.append(
+      richElement("b", "truth", `真 ${error.true_class ?? "—"}`),
+      richElement("span", "", "→"),
+      richElement("b", "pred", `判 ${error.predicted_class ?? "—"}`),
+    );
+    head.append(classes);
+    const probabilities = Array.isArray(error.class_probabilities) ? error.class_probabilities.map(finite).filter((value) => value !== null) : [];
+    const confidence = finite(error.confidence) ?? (probabilities.length ? Math.max(...probabilities) : null);
+    if (confidence !== null) head.append(richElement("span", "qwen-error-conf", `置信 ${(confidence * 100).toFixed(1)}%`));
+    item.append(head);
+    if (error.sample_id) item.append(richElement("code", "qwen-error-sample", String(error.sample_id)));
+    const notes = [].concat(error.evidence || [], error.limitations || []).filter((note) => typeof note === "string" && note);
+    if (notes.length) item.append(richElement("small", "qwen-error-notes", notes.join(" · ")));
+  }
+
   function finite(value) {
     if (value === null || value === undefined || value === "" || typeof value === "boolean") return null;
     if (typeof value === "string" && !value.trim()) return null;
@@ -304,9 +399,9 @@
   function chainEvidenceItems(entry) {
     if (!entry) return [];
     const candidate = firstPresent(entry.evidence, entry.facts, entry.citations, entry.sources, entry.quotes, entry.evidence_ids);
-    if (Array.isArray(candidate)) return candidate.map(displayValue).filter((value) => value !== "—");
-    if (isRecord(candidate)) return Object.entries(candidate).map(([key, value]) => `${key}: ${displayValue(value)}`);
-    return candidate === undefined ? [] : [displayValue(candidate)];
+    if (Array.isArray(candidate)) return candidate.filter((value) => displayValue(value) !== "—");
+    if (isRecord(candidate)) return [candidate];
+    return candidate === undefined ? [] : [candidate];
   }
 
   function appendDefinitionRows(root, object, prefix = "") {
@@ -316,7 +411,7 @@
       const row = document.createElement("div");
       const term = document.createElement("dt");
       const description = document.createElement("dd");
-      term.textContent = prefix ? `${prefix}.${key}` : key;
+      term.textContent = prefix ? `${prefix} · ${humanizeKey(key)}` : humanizeKey(key);
       description.textContent = displayValue(value);
       row.append(term, description);
       root.append(row);
@@ -339,7 +434,7 @@
     const evidenceItems = chainEvidenceItems(entry);
     (evidenceItems.length ? evidenceItems : ["API 没有返回本段逐项证据。"]).forEach((value) => {
       const item = document.createElement("li");
-      item.textContent = value;
+      renderRich(item, value);
       evidenceList.append(item);
     });
 
@@ -434,7 +529,7 @@
       external && external.scientific_boundary,
       evidence && evidence.evidence_boundary && evidence.evidence_boundary.scientific_limits,
     );
-    if (boundary !== undefined) setText("generalizationBoundary", displayValue(boundary));
+    if (boundary !== undefined) renderRich("generalizationBoundary", boundary);
     const ready = localMacro !== null && externalMacro !== null;
     const partial = localMacro !== null || externalMacro !== null;
     $("generalizationCompare").dataset.state = ready ? "ready" : partial ? "partial" : "unavailable";
@@ -823,7 +918,7 @@
     if (errorItems.length) {
       errorItems.forEach((error) => {
         const item = document.createElement("li");
-        item.textContent = displayValue(error);
+        renderQwenErrorCard(item, error);
         errorsRoot.append(item);
       });
     } else {
@@ -832,7 +927,7 @@
       errorsRoot.append(item);
     }
     const boundary = firstPresent(benchmark.boundary, benchmark.evidence_boundary, benchmark.development_set_boundary, benchmark.claim_boundary);
-    setText("qwenVlBoundary", boundary === undefined ? "API 未给出可核验的集合边界；本页保守地把该基准视为开发集，不据此声称新的密封外部泛化。" : displayValue(boundary));
+    renderRich("qwenVlBoundary", boundary === undefined ? "API 未给出可核验的集合边界；本页保守地把该基准视为开发集，不据此声称新的密封外部泛化。" : boundary);
     const benchmarkStatus = normalizeChainStatus(benchmark.status);
     const verificationStatus = normalizeChainStatus(verification.status);
     const executionFailed = benchmarkStatus === "fail" || verificationStatus === "fail";
@@ -1188,7 +1283,7 @@
     setText("errorAtlasDetailOutcome", errorAtlasOutcomeLabel(record.outcome), "unavailable");
     setText("errorAtlasDetailTaxonomy", record.taxonomyLabels.length ? record.taxonomyLabels.join(" · ") : null, "unavailable");
     setText("errorAtlasDetailRange", errorAtlasRangeText(record), "unavailable");
-    setText("errorAtlasDetailBoundary", atlasValue(record.scientificBoundary), "unavailable");
+    renderRich("errorAtlasDetailBoundary", record.scientificBoundary, "unavailable");
     renderErrorAtlasExperiments(record);
   }
 
@@ -2439,6 +2534,18 @@
     }
   }
 
+  // Public snapshot: replay the first guided experiment once the workbench scrolls into view,
+  // so judges land on a computed finding instead of empty panels.
+  function autoRunScienceWhenVisible() {
+    if (!isPublicStatic || state.scienceResult || typeof IntersectionObserver !== "function") return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      if (!state.scienceResult && !state.scienceRunning) runScience();
+    }, { threshold: 0.2 });
+    observer.observe($("scienceWorkbench"));
+  }
+
   async function loadScienceOptions() {
     try {
       const payload = await api("/api/science/options");
@@ -2455,6 +2562,7 @@
       $("runScience").disabled = false;
       $("scienceWorkbench").dataset.state = "ready";
       selectScienceExperiment(state.scienceExperimentId);
+      autoRunScienceWhenVisible();
     } catch (error) {
       $("scienceWorkbench").dataset.state = "error";
       setText("scienceSourceState", "科学实验 API 不可用");
@@ -2730,6 +2838,7 @@
     renderErrorAtlas(evidence);
     renderAgents(evidence.qwen_evidence || {});
     setText("qwenRoleCount", finite(evidence.qwen_evidence && evidence.qwen_evidence.role_call_count));
+    setText("heroRoleCount", finite(evidence.qwen_evidence && evidence.qwen_evidence.role_call_count));
     setText("qwenProvider", evidence.qwen_evidence && evidence.qwen_evidence.provider_mode);
     setText("qwenOrigin", evidence.qwen_evidence && evidence.qwen_evidence.origin === "HASH_VERIFIED_PRIOR_REAL_RUN" ? "已验真历史实跑" : evidence.qwen_evidence && evidence.qwen_evidence.origin);
     renderFaults(evidence.failure_matrix || {});
@@ -3654,8 +3763,48 @@
   });
   window.addEventListener("pageshow", () => { $("labApiKey").value = ""; });
 
-  const metricStrip = document.querySelector(".metric-strip");
-  if (metricStrip && $("judgeLab")) metricStrip.after($("judgeLab"));
+  const AUDIT_TABS = [["auditTabAtlas", "auditPanelAtlas"], ["auditTabPixel", "auditPanelPixel"], ["auditTabQwen", "auditPanelQwen"]];
+  function selectAuditTab(tabId, focus = false) {
+    AUDIT_TABS.forEach(([tab, panel]) => {
+      const selected = tab === tabId;
+      $(tab).setAttribute("aria-selected", String(selected));
+      $(tab).tabIndex = selected ? 0 : -1;
+      $(panel).hidden = !selected;
+      if (selected && focus) $(tab).focus();
+    });
+  }
+  AUDIT_TABS.forEach(([tab], index) => {
+    $(tab).addEventListener("click", () => selectAuditTab(tab));
+    $(tab).addEventListener("keydown", (event) => {
+      const offset = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+      if (event.key === "Home" || event.key === "End") {
+        event.preventDefault();
+        selectAuditTab(AUDIT_TABS[event.key === "Home" ? 0 : AUDIT_TABS.length - 1][0], true);
+      } else if (offset) {
+        event.preventDefault();
+        selectAuditTab(AUDIT_TABS[(index + offset + AUDIT_TABS.length) % AUDIT_TABS.length][0], true);
+      }
+    });
+  });
+
+  const siteHeader = document.querySelector(".site-header");
+  const updateHeader = () => { if (siteHeader) siteHeader.dataset.scrolled = String(window.scrollY > 24); };
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+  const navLinks = Array.from(document.querySelectorAll("[data-nav]"));
+  if (navLinks.length && typeof IntersectionObserver === "function") {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          if (link.dataset.nav === entry.target.id) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    navLinks.forEach((link) => { const target = $(link.dataset.nav); if (target) navObserver.observe(target); });
+  }
+
   loadEvidence();
   loadScienceOptions();
   loadLabOptions();
